@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block main %}
+    <div class="container mt-3 mb-3">
+        <h2>{{ recipe.title }}</h2>
+        <p>{{ recipe.description }}</p>
+        <p>Время приготовления: {{ recipe.cooking_time }} мин</p>
+
+        {% if recipe.photo %}
+            <img src="{{ recipe.photo.url }}" alt="{{ recipe.title }}" class="img-fluid">
+        {% endif %}
+
+        <h3>Ингредиенты:</h3>
+        <ul>
+            {% for ingredient in recipe.ingredient_set.all %}
+                <li>{{ ingredient.name }} - {{ ingredient.description }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Инструкция:</h3>
+        <ol>
+            {% for instruction in recipe.instruction_set.all %}
+                <li>{{ instruction.name }} - {{ instruction.description }}</li>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock main %}

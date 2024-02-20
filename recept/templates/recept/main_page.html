@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+
+{% block main %}
+<div class="container mt-3 mb-3">
+    <div class="categories d-flex justify-content-around">
+        {% for recipe in recipes %}
+            <a href="{% url 'category' category_id=recipe.category.id %}" class="btn btn-outline-primary btn-lg">
+                <b>{{ recipe.category }}</b>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container mb-3">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for recipe in recipes %}
+            <div class="col">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <b>Категория: {{ recipe.category }}</b>
+                    </div>
+                    <div class="nav-link">
+                        <a href="{% url 'recipe_detail' recipe_id=recipe.id %}"><b>Подробнее</b></a>
+                    </div>
+                </div>
+
+                <div class="card h-100">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"> {{ recipe.title }}</h5>
+                        <p class="card-text">{{ recipe.description }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <b>Автор: </b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock main %}
